@@ -149,8 +149,6 @@ body{font-family:'Space Grotesk','Gowun Dodum',sans-serif;color:#fff;
 const BLOCKS = [{"start": 2.0, "end": 18.4, "lines": ["yeah, maybe I'm that type", "조용한데 너만 보면 bright light", "생각이 너무 많아도 fine", "너 하나면 mood right"]}, {"start": 18.4, "end": 28.7, "lines": ["오늘도 또 replay, 네 말 한 줄에 맘이 sway", "웃는 표정 한 장면에", "my world goes color gray → gold"]}, {"start": 28.7, "end": 39.1, "lines": ["난 느린 템포, 너는 uptown", "그래서 더 끌려 paradox sound", "감정은 깊고 말은 short", "이건 나만의 code, can't abort"]}, {"start": 39.1, "end": 49.5, "lines": ["내 머리 속엔 mixtape", "너의 말들이 전부 shape", "INFP type of faith", "진심이 습관이 돼"]}, {"start": 49.5, "end": 59.8, "lines": ["I'm an INFP in love,", "조용하지만 loud enough,", "이 리듬 속 너의 tone이", "내 하루를 바꿔 baby."]}, {"start": 59.8, "end": 70.2, "lines": ["I'm an INFP in love,", "말보다 진심이 먼저와,", "감정의 파도 위 surf,", "we vibin' under the sun."]}, {"start": 70.2, "end": 80.5, "lines": ["late night, guitar hummin',", "내 마음은 너로 strummin',", "이 노래는 diary 같아", "숨길 수가 없어 runnin'."]}, {"start": 80.5, "end": 90.9, "lines": ["네가 웃을 땐 tempo up,", "네가 침묵이면 fade out,", "I'm tryna act cool,", "but my heart's too loud."]}, {"start": 90.9, "end": 101.3, "lines": ["I'm not tryna rush the vibe,", "이 감정은 slow drive,", "너의 세상에 닿을 때까지", "keep it steady, keep it right."]}, {"start": 101.3, "end": 111.6, "lines": ["I'm an INFP in love,", "생각은 느려도 맘은 불타,", "이 순간 그대로 record해,", "band sound, heart on fire."]}, {"start": 111.6, "end": 126.0, "lines": ["I'm an INFP in love,", "너의 이름이 내 melody line,", "feel so alive, no disguise,", "INFP type love, real time."]}];
 const audio=document.getElementById('audio');
 const wrap=document.getElementById('wrap');
-const introEl=document.getElementById('intro');
-const introMsgs=[...introEl.children].map(el=>({el,t:parseFloat(el.dataset.t)}));
 
 const blockEls=BLOCKS.map(blk=>{
   const d=document.createElement('div');d.className='block';
@@ -165,8 +163,7 @@ document.getElementById('start').addEventListener('click',()=>{
   audio.play();setTimeout(tick,60);
 });
 
-const INTRO_END = BLOCKS[0].start;
-let curBlock=-1, curIntro=-1;
+let curBlock=-1;
 function showBlock(bi){
   blockEls.forEach((el,i)=>{
     if(i===bi){el.classList.remove('out');el.classList.add('show');
@@ -177,19 +174,9 @@ function showBlock(bi){
 }
 function tick(){
   const t=audio.currentTime;
-  if(t<INTRO_END){
-    introEl.style.display='flex';
-    let ii=-1;
-    for(let i=0;i<introMsgs.length;i++){if(introMsgs[i].t<=t)ii=i;else break;}
-    if(ii!==curIntro){curIntro=ii;
-      introMsgs.forEach((m,i)=>{m.el.classList.remove('show','gone');
-        if(i<ii)m.el.classList.add('gone');else if(i===ii)m.el.classList.add('show');});}
-  }else{
-    if(introEl.style.display!=='none')introEl.style.display='none';
-    let bi=-1;
-    for(let i=0;i<BLOCKS.length;i++){if(BLOCKS[i].start<=t+0.05)bi=i;else break;}
-    if(bi!==curBlock&&bi>=0){curBlock=bi;showBlock(bi);}
-  }
+  let bi=-1;
+  for(let i=0;i<BLOCKS.length;i++){if(BLOCKS[i].start<=t+0.05)bi=i;else break;}
+  if(bi!==curBlock&&bi>=0){curBlock=bi;showBlock(bi);}
   const d=audio.duration||1;
   document.getElementById('fill').style.width=(audio.currentTime/d*100)+'%';
   document.getElementById('cur').textContent=fmt(audio.currentTime);
@@ -198,7 +185,7 @@ function tick(){
 audio.addEventListener('loadedmetadata',()=>{document.getElementById('dur').textContent=fmt(audio.duration);});
 const playBtn=document.getElementById('play');
 playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playBtn.textContent='❚❚';}else{audio.pause();playBtn.textContent='▶';}});
-document.getElementById('bar').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();audio.currentTime=(e.clientX-r.left)/r.width*audio.duration;curBlock=-1;curIntro=-1;});
+document.getElementById('bar').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();audio.currentTime=(e.clientX-r.left)/r.width*audio.duration;curBlock=-1;});
 </script>
 </body>
 </html>
