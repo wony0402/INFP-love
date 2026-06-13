@@ -5,26 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>INFP in love</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Gowun+Dodum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Nanum+Pen+Script&family=Gaegu:wght@700&family=Caveat:wght@700&display=swap');
 :root{
   --blue:#3b82f6; --blue-deep:#1e40af; --pink:#f472b6; --pink-hot:#ec4899;
   --cream:#fdf2f8; --ink:#1e1b4b; --glow:#a5b4fc;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
-body{font-family:'Space Grotesk','Gowun Dodum',sans-serif;color:#fff;
+body{font-family:'Caveat','Gaegu',sans-serif;color:#fff;
   display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;
   background:#1e1b4b}
 
 /* animated gradient bg */
 .bg{position:fixed;inset:0;z-index:0;
-  background:linear-gradient(135deg,#3b82f6 0%,#6366f1 35%,#a855f7 60%,#ec4899 100%);
+  background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 35%,#3b82f6 62%,#6366f1 85%,#a855f7 100%);
   background-size:300% 300%;animation:grad 14s ease infinite}
 @keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .blob{position:fixed;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0;mix-blend-mode:screen}
 .b1{width:380px;height:380px;background:#60a5fa;top:-80px;left:-60px;animation:float1 11s ease-in-out infinite}
-.b2{width:340px;height:340px;background:#f472b6;bottom:-70px;right:-50px;animation:float2 13s ease-in-out infinite}
-.b3{width:260px;height:260px;background:#c084fc;top:40%;left:55%;animation:float1 9s ease-in-out infinite}
+.b2{width:340px;height:340px;background:#3b82f6;bottom:-70px;right:-50px;animation:float2 13s ease-in-out infinite}
+.b3{width:260px;height:260px;background:#818cf8;top:40%;left:55%;animation:float1 9s ease-in-out infinite}
 @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
 @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,30px)}}
 
@@ -36,7 +36,7 @@ body{font-family:'Space Grotesk','Gowun Dodum',sans-serif;color:#fff;
   background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.12),transparent 60%)}
 #start .vinyl-start{width:300px;height:300px;animation:spin 16s linear infinite;
   filter:drop-shadow(0 16px 40px rgba(236,72,153,.5))}
-#start h1{font-weight:700;font-size:38px;letter-spacing:-1px;line-height:1.1;
+#start h1{font-family:'Caveat',cursive;font-weight:700;font-size:52px;letter-spacing:0;line-height:1;
   text-shadow:0 2px 20px rgba(0,0,0,.3)}
 #start .sub{font-size:15px;letter-spacing:3px;color:rgba(255,255,255,.85);font-weight:500;text-transform:uppercase}
 #start .press{font-size:15px;letter-spacing:1px;margin-top:6px;font-weight:500;
@@ -53,10 +53,11 @@ body{font-family:'Space Grotesk','Gowun Dodum',sans-serif;color:#fff;
 
 /* intro */
 #intro{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;pointer-events:none}
-#intro .imsg{position:absolute;font-weight:700;font-size:32px;text-align:center;padding:0 30px;
+#intro .imsg{position:absolute;font-family:'Caveat','Gaegu',cursive;font-weight:700;font-size:40px;text-align:center;padding:0 30px;color:#fff;
   opacity:0;transform:translateY(18px) scale(.95);transition:opacity 1s ease,transform 1s ease;
   text-shadow:0 2px 24px rgba(0,0,0,.35)}
-#intro .imsg.show{opacity:1;transform:translateY(0) scale(1)}
+#intro .imsg.show{opacity:1;transform:translateY(0) scale(1);animation:introGlow 2s ease-in-out infinite}
+@keyframes introGlow{0%,100%{text-shadow:0 0 14px rgba(255,255,255,.85),0 0 30px rgba(244,114,182,.7),0 0 46px rgba(96,165,250,.5)}50%{text-shadow:0 0 22px rgba(255,255,255,1),0 0 44px rgba(244,114,182,1),0 0 68px rgba(96,165,250,.85)}}
 #intro .imsg.gone{opacity:0;transform:translateY(-18px) scale(.95)}
 
 /* lyrics blocks */
@@ -66,11 +67,22 @@ body{font-family:'Space Grotesk','Gowun Dodum',sans-serif;color:#fff;
   transition:opacity .9s ease,transform .9s cubic-bezier(.34,1.56,.64,1)}
 .block.show{opacity:1;transform:translateY(0) scale(1)}
 .block.out{opacity:0;transform:translateY(-30px) scale(.96)}
-.line{font-size:26px;line-height:1.55;padding:6px 0;font-weight:500;width:100%;
+.line{font-family:'Caveat','Gaegu',cursive;font-size:33px;line-height:1.4;padding:5px 0;font-weight:700;width:100%;
   text-shadow:0 2px 18px rgba(0,0,0,.3);opacity:0;transform:translateY(14px)}
 .block.show .line{animation:pop .6s cubic-bezier(.34,1.56,.64,1) forwards}
 @keyframes pop{to{opacity:1;transform:translateY(0)}}
 .line.hl{color:#fff;font-weight:700}
+
+
+/* highlight glow (후렴) */
+.block.glow .line{animation:pop .6s cubic-bezier(.34,1.56,.64,1) forwards, shimmer 2.2s ease-in-out infinite}
+.block.glow.show .line{color:#fff;text-shadow:0 0 12px rgba(255,255,255,.9),0 0 28px rgba(244,114,182,.8),0 0 44px rgba(96,165,250,.6)}
+@keyframes shimmer{0%,100%{text-shadow:0 0 12px rgba(255,255,255,.9),0 0 28px rgba(244,114,182,.8),0 0 44px rgba(96,165,250,.6)}50%{text-shadow:0 0 20px rgba(255,255,255,1),0 0 40px rgba(244,114,182,1),0 0 64px rgba(96,165,250,.9)}}
+/* 전체 화면 glow pulse */
+#player.glowing::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  box-shadow:inset 0 0 120px 20px rgba(244,114,182,.35),inset 0 0 200px 60px rgba(96,165,250,.25);
+  animation:screenGlow 2.4s ease-in-out infinite}
+@keyframes screenGlow{0%,100%{opacity:.6}50%{opacity:1}}
 
 /* controls */
 .controls{display:flex;flex-direction:column;gap:12px;z-index:6}
@@ -101,8 +113,8 @@ body{font-family:'Space Grotesk','Gowun Dodum',sans-serif;color:#fff;
   .main .pc-title{display:block !important;font-size:30px;margin-bottom:26px;align-self:flex-start}
   .main .lyrics-wrap{border:1.5px solid rgba(255,255,255,.25);border-radius:24px;background:rgba(255,255,255,.06);backdrop-filter:blur(4px)}
   .main .controls{padding:20px 6px 0}
-  .line{font-size:32px}
-  #intro .imsg{font-size:46px}
+  .line{font-size:42px}
+  #intro .imsg{font-size:58px}
 }
 </style>
 </head>
@@ -131,6 +143,11 @@ body{font-family:'Space Grotesk','Gowun Dodum',sans-serif;color:#fff;
   <div class="main">
     <div class="title-plate pc-title" style="display:none">INFP in love</div>
     <div class="lyrics-wrap" id="wrap">
+      <div id="intro">
+        <div class="imsg" data-t="0">“너 때문에 빨개져”</div>
+        <div class="imsg" data-t="3">“이런적 없었는데”</div>
+        <div class="imsg" data-t="6">“그만큼 너가 좋단거겠지”</div>
+      </div>
     </div>
     <div class="controls">
       <div class="bar" id="bar"><div class="fill" id="fill"></div></div>
@@ -146,22 +163,46 @@ body{font-family:'Space Grotesk','Gowun Dodum',sans-serif;color:#fff;
 <audio id="audio" src="song.mp3" preload="auto"></audio>
 
 <script>
-const BLOCKS = [{"start": 2.0, "end": 18.4, "lines": ["yeah, maybe I'm that type", "조용한데 너만 보면 bright light", "생각이 너무 많아도 fine", "너 하나면 mood right"]}, {"start": 18.4, "end": 28.7, "lines": ["오늘도 또 replay, 네 말 한 줄에 맘이 sway", "웃는 표정 한 장면에", "my world goes color gray → gold"]}, {"start": 28.7, "end": 39.1, "lines": ["난 느린 템포, 너는 uptown", "그래서 더 끌려 paradox sound", "감정은 깊고 말은 short", "이건 나만의 code, can't abort"]}, {"start": 39.1, "end": 49.5, "lines": ["내 머리 속엔 mixtape", "너의 말들이 전부 shape", "INFP type of faith", "진심이 습관이 돼"]}, {"start": 49.5, "end": 59.8, "lines": ["I'm an INFP in love,", "조용하지만 loud enough,", "이 리듬 속 너의 tone이", "내 하루를 바꿔 baby."]}, {"start": 59.8, "end": 70.2, "lines": ["I'm an INFP in love,", "말보다 진심이 먼저와,", "감정의 파도 위 surf,", "we vibin' under the sun."]}, {"start": 70.2, "end": 80.5, "lines": ["late night, guitar hummin',", "내 마음은 너로 strummin',", "이 노래는 diary 같아", "숨길 수가 없어 runnin'."]}, {"start": 80.5, "end": 90.9, "lines": ["네가 웃을 땐 tempo up,", "네가 침묵이면 fade out,", "I'm tryna act cool,", "but my heart's too loud."]}, {"start": 90.9, "end": 101.3, "lines": ["I'm not tryna rush the vibe,", "이 감정은 slow drive,", "너의 세상에 닿을 때까지", "keep it steady, keep it right."]}, {"start": 101.3, "end": 111.6, "lines": ["I'm an INFP in love,", "생각은 느려도 맘은 불타,", "이 순간 그대로 record해,", "band sound, heart on fire."]}, {"start": 111.6, "end": 126.0, "lines": ["I'm an INFP in love,", "너의 이름이 내 melody line,", "feel so alive, no disguise,", "INFP type love, real time."]}];
+const BLOCKS = [{"start": 0.0, "end": 10.0, "lines": ["yeah, maybe I'm that type", "조용한데 너만 보면 bright light", "생각이 너무 많아도 fine", "너 하나면 mood right"], "glow": false}, {"start": 10.0, "end": 18.0, "lines": ["오늘도 또 replay, 네 말 한 줄에 맘이 sway", "웃는 표정 한 장면에", "my world goes color gray → gold"], "glow": false}, {"start": 18.0, "end": 28.0, "lines": ["난 느린 템포, 너는 uptown", "그래서 더 끌려 paradox sound", "감정은 깊고 말은 short", "이건 나만의 code, can't abort"], "glow": false}, {"start": 28.0, "end": 38.0, "lines": ["내 머리 속엔 mixtape", "너의 말들이 전부 shape", "INFP type of faith", "진심이 습관이 돼"], "glow": false}, {"start": 38.0, "end": 48.0, "lines": ["I'm an INFP in love,", "조용하지만 loud enough,", "이 리듬 속 너의 tone이", "내 하루를 바꿔 baby."], "glow": true}, {"start": 48.0, "end": 59.0, "lines": ["I'm an INFP in love,", "말보다 진심이 먼저와,", "감정의 파도 위 surf,", "we vibin' under the sun."], "glow": true}, {"start": 59.0, "end": 66.0, "lines": ["late night, guitar hummin',", "내 마음은 너로 strummin',", "이 노래는 diary 같아", "숨길 수가 없어 runnin'."], "glow": false}, {"start": 66.0, "end": 73.0, "lines": ["네가 웃을 땐 tempo up,", "네가 침묵이면 fade out,", "I'm tryna act cool,", "but my heart's too loud."], "glow": false}, {"start": 73.0, "end": 85.0, "lines": ["I'm not tryna rush the vibe,", "이 감정은 slow drive,", "너의 세상에 닿을 때까지", "keep it steady, keep it right."], "glow": false}, {"start": 85.0, "end": 94.0, "lines": ["I'm an INFP in love,", "생각은 느려도 맘은 불타,", "이 순간 그대로 record해,", "band sound, heart on fire."], "glow": true}, {"start": 94.0, "end": 126.0, "lines": ["I'm an INFP in love,", "너의 이름이 내 melody line,", "feel so alive, no disguise,", "INFP type love, real time."], "glow": true}];
 const audio=document.getElementById('audio');
 const wrap=document.getElementById('wrap');
+const introEl=document.getElementById('intro');
+const introMsgs=[...introEl.children].map(el=>({el,t:parseFloat(el.dataset.t)}));
+const playerEl=document.getElementById('player');
 
 const blockEls=BLOCKS.map(blk=>{
-  const d=document.createElement('div');d.className='block';
+  const d=document.createElement('div');d.className='block'+(blk.glow?' glow':'');
   blk.lines.forEach(t=>{const p=document.createElement('div');p.className='line';p.textContent=t;d.appendChild(p);});
   wrap.appendChild(d);return d;
 });
 function fmt(s){s=Math.max(0,s|0);return (s/60|0)+':'+String(s%60).padStart(2,'0')}
 
+const INTRO_DUR=9; // 인트로 문구 3개 x 3초
+let introStart=0, songStarted=false;
+
 document.getElementById('start').addEventListener('click',()=>{
   document.getElementById('start').style.display='none';
-  document.getElementById('player').style.display='flex';
-  audio.play();setTimeout(tick,60);
+  playerEl.style.display='flex';
+  introStart=performance.now();
+  runIntro();
 });
+
+// 인트로 문구 단계별 표시 (노래는 아직 재생 안 함)
+let curIntro=-1;
+function runIntro(){
+  const elapsed=(performance.now()-introStart)/1000;
+  let ii=-1;
+  for(let i=0;i<introMsgs.length;i++){if(introMsgs[i].t<=elapsed)ii=i;else break;}
+  if(ii!==curIntro){curIntro=ii;
+    introMsgs.forEach((m,i)=>{m.el.classList.remove('show','gone');
+      if(i<ii)m.el.classList.add('gone');else if(i===ii)m.el.classList.add('show');});}
+  if(elapsed<INTRO_DUR){requestAnimationFrame(runIntro);}
+  else{
+    introMsgs.forEach(m=>{m.el.classList.remove('show');m.el.classList.add('gone');});
+    introEl.style.display='none';
+    audio.play();songStarted=true;setTimeout(tick,40);
+  }
+}
 
 let curBlock=-1;
 function showBlock(bi){
@@ -171,6 +212,9 @@ function showBlock(bi){
     }else if(i<bi){el.classList.remove('show');el.classList.add('out');}
     else{el.classList.remove('show','out');}
   });
+  // 전체화면 glow 토글
+  if(BLOCKS[bi].glow)playerEl.classList.add('glowing');
+  else playerEl.classList.remove('glowing');
 }
 function tick(){
   const t=audio.currentTime;
@@ -184,8 +228,8 @@ function tick(){
 }
 audio.addEventListener('loadedmetadata',()=>{document.getElementById('dur').textContent=fmt(audio.duration);});
 const playBtn=document.getElementById('play');
-playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playBtn.textContent='❚❚';}else{audio.pause();playBtn.textContent='▶';}});
-document.getElementById('bar').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();audio.currentTime=(e.clientX-r.left)/r.width*audio.duration;curBlock=-1;});
+playBtn.addEventListener('click',()=>{if(!songStarted)return;if(audio.paused){audio.play();playBtn.textContent='❚❚';}else{audio.pause();playBtn.textContent='▶';}});
+document.getElementById('bar').addEventListener('click',e=>{if(!songStarted)return;const r=e.currentTarget.getBoundingClientRect();audio.currentTime=(e.clientX-r.left)/r.width*audio.duration;curBlock=-1;});
 </script>
 </body>
 </html>
