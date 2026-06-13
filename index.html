@@ -53,7 +53,7 @@ body{font-family:'Caveat','Gaegu',sans-serif;color:#fff;
 
 /* intro */
 #intro{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;pointer-events:none}
-#intro .imsg{position:absolute;font-family:'Caveat','Gaegu',cursive;font-weight:700;font-size:40px;text-align:center;padding:0 30px;color:#fff;
+#intro .imsg{position:absolute;font-family:'Caveat','Gaegu',cursive;font-weight:700;font-size:28px;text-align:center;padding:0 16px;color:#fff;white-space:nowrap;
   opacity:0;transform:translateY(18px) scale(.95);transition:opacity 1s ease,transform 1s ease;
   text-shadow:0 2px 24px rgba(0,0,0,.35)}
 #intro .imsg.show{opacity:1;transform:translateY(0) scale(1);animation:introGlow 2s ease-in-out infinite}
@@ -80,9 +80,21 @@ body{font-family:'Caveat','Gaegu',sans-serif;color:#fff;
 @keyframes shimmer{0%,100%{text-shadow:0 0 12px rgba(255,255,255,.9),0 0 28px rgba(244,114,182,.8),0 0 44px rgba(96,165,250,.6)}50%{text-shadow:0 0 20px rgba(255,255,255,1),0 0 40px rgba(244,114,182,1),0 0 64px rgba(96,165,250,.9)}}
 /* 전체 화면 glow pulse */
 #player.glowing::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  box-shadow:inset 0 0 120px 20px rgba(244,114,182,.35),inset 0 0 200px 60px rgba(96,165,250,.25);
-  animation:screenGlow 2.4s ease-in-out infinite}
-@keyframes screenGlow{0%,100%{opacity:.6}50%{opacity:1}}
+  box-shadow:inset 0 0 100px 16px rgba(147,197,253,.5),inset 0 0 200px 70px rgba(96,165,250,.4);
+  animation:screenGlow 1.8s ease-in-out infinite}
+@keyframes screenGlow{0%,100%{box-shadow:inset 0 0 90px 14px rgba(147,197,253,.4),inset 0 0 180px 60px rgba(96,165,250,.3);opacity:.7}50%{box-shadow:inset 0 0 130px 26px rgba(191,219,254,.75),inset 0 0 230px 90px rgba(96,165,250,.55);opacity:1}}
+/* 반짝이는 스파클 레이어 */
+#player.glowing::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(circle 3px at 18% 24%,rgba(255,255,255,.95),transparent),
+    radial-gradient(circle 2px at 72% 18%,rgba(255,255,255,.9),transparent),
+    radial-gradient(circle 2.5px at 85% 62%,rgba(255,255,255,.9),transparent),
+    radial-gradient(circle 2px at 32% 78%,rgba(255,255,255,.85),transparent),
+    radial-gradient(circle 3px at 58% 42%,rgba(255,255,255,.9),transparent),
+    radial-gradient(circle 2px at 8% 60%,rgba(255,255,255,.8),transparent),
+    radial-gradient(circle 2.5px at 92% 35%,rgba(255,255,255,.85),transparent);
+  animation:sparkle 1.6s ease-in-out infinite}
+@keyframes sparkle{0%,100%{opacity:.2;transform:scale(.98)}50%{opacity:1;transform:scale(1.02)}}
 
 /* controls */
 .controls{display:flex;flex-direction:column;gap:12px;z-index:6}
@@ -114,7 +126,7 @@ body{font-family:'Caveat','Gaegu',sans-serif;color:#fff;
   .main .lyrics-wrap{border:1.5px solid rgba(255,255,255,.25);border-radius:24px;background:rgba(255,255,255,.06);backdrop-filter:blur(4px)}
   .main .controls{padding:20px 6px 0}
   .line{font-size:42px}
-  #intro .imsg{font-size:58px}
+  #intro .imsg{font-size:38px}
 }
 </style>
 </head>
@@ -183,11 +195,17 @@ let introStart=0, songStarted=false;
 document.getElementById('start').addEventListener('click',()=>{
   document.getElementById('start').style.display='none';
   playerEl.style.display='flex';
+  // 탭 직후 재생 권한 확보: 음소거로 재생 시작 → 즉시 멈춰서 0초 대기
+  audio.muted=true;
+  audio.play().then(()=>{
+    audio.pause();
+    audio.currentTime=0;
+  }).catch(()=>{});
   introStart=performance.now();
   runIntro();
 });
 
-// 인트로 문구 단계별 표시 (노래는 아직 재생 안 함)
+// 인트로 문구 단계별 표시 (노래는 음소거 대기)
 let curIntro=-1;
 function runIntro(){
   const elapsed=(performance.now()-introStart)/1000;
@@ -200,7 +218,12 @@ function runIntro(){
   else{
     introMsgs.forEach(m=>{m.el.classList.remove('show');m.el.classList.add('gone');});
     introEl.style.display='none';
-    audio.play();songStarted=true;setTimeout(tick,40);
+    // 소리 켜고 0초부터 재생
+    audio.muted=false;
+    audio.currentTime=0;
+    const p=audio.play();
+    if(p&&p.catch)p.catch(()=>{});
+    songStarted=true;setTimeout(tick,40);
   }
 }
 
